@@ -37,6 +37,7 @@ extern "C"
 #include "dev/plrasm.h"
 }
 #include "oplplay.h"
+#include "oplptrak.h"
 #include "ocpemu.h"
 
 /* options */
@@ -262,6 +263,9 @@ int __attribute__ ((visibility ("internal"))) oplOpenPlayer (const char *filenam
 	mcpNormalize (mcpNormalizeDefaultPlayP);
 
 	active=1;
+
+	oplTrkSetup(p);
+
 	return 1;
 
 error_out:

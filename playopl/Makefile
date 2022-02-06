@@ -38,7 +38,7 @@ opltype.o: opltype.cpp \
 	../stuff/compat.h
 	$(CXX) $(ADPLUG_CXXFLAGS) opltype.cpp -o $@ -c
 
-playopl_so=oplpplay.o oplplay.o ocpemu.o
+playopl_so=oplpplay.o oplplay.o oplptrak.o ocpemu.o
 playopl$(LIB_SUFFIX): $(playopl_so)
 	$(CXX) $(SHARED_FLAGS) $(LDFLAGS) -o $@ $^ $(ADPLUG_LIBS) $(MATH_LIBS)
 
@@ -72,8 +72,16 @@ oplplay.o: oplplay.cpp \
 	../dev/deviplay.h \
 	../dev/plrasm.h \
 	../stuff/imsrtns.h \
-	oplplay.h ocpemu.h
+	oplplay.h ocpemu.h oplptrak.h
 	$(CXX) $(ADPLUG_CXXFLAGS) oplplay.cpp -o $@ -c
+
+oplptrak.o: oplptrak.cpp \
+	../config.h \
+	../types.h \
+	../cpiface/cpiface.h \
+	../stuff/poutput.h \
+	oplplay.h ocpemu.h oplptrak.h
+	$(CXX) $(ADPLUG_CXXFLAGS) oplptrak.cpp -o $@ -c
 
 ocpemu.o: ocpemu.cpp \
 	ocpemu.h
